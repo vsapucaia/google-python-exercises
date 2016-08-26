@@ -15,15 +15,23 @@
 # It's ok if you do not complete all the functions, and there
 # are some additional functions to try in list2.py.
 
+from operator import itemgetter
+import itertools
 
 # A. match_ends
 # Given a list of strings, return the count of the number of
 # strings where the string length is 2 or more and the first
 # and last chars of the string are the same.
 # Note: python does not have a ++ operator, but += works.
+
+
 def match_ends(words):
-    # +++your code here+++
-    return
+    # count = 0
+    # for word in words:
+    #     if len(word) >= 2 and word[0] == word[-1]:
+    #         count += 1
+    # return count
+    return sum(1 for word in words if len(word) >= 2 and word[0] == word[-1])
 
 
 # B. front_x
@@ -34,8 +42,8 @@ def match_ends(words):
 # Hint: this can be done by making 2 lists and sorting each of them
 # before combining them.
 def front_x(words):
-    # +++your code here+++
-    return
+    return sorted(list(itertools.compress(words, (word[0] == 'x' for word in words)))) + \
+           sorted(list(itertools.compress(words, (word[0] != 'x' for word in words))))
 
 
 # C. sort_last
@@ -45,8 +53,7 @@ def front_x(words):
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
-    # +++your code here+++
-    return
+    return sorted(tuples, key=itemgetter(-1))
 
 
 # Simple provided test() function used in main() to print
@@ -83,7 +90,6 @@ def main():
          [(3, 1), (1, 2), (2, 3)])
     test(sort_last([(1, 7), (1, 3), (3, 4, 5), (2, 2)]),
          [(2, 2), (1, 3), (3, 4, 5), (1, 7)])
-
 
 if __name__ == '__main__':
     main()
