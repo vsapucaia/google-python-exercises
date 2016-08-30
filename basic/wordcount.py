@@ -38,13 +38,22 @@ print_words() and print_top().
 """
 
 import sys
+from collections import Counter
 
 
-# +++your code here+++
-# Define print_words(filename) and print_top(filename) functions.
-# You could write a helper utility function that reads a file
-# and builds and returns a word/count dict for it.
-# Then print_words() and print_top() can just call the utility function.
+def word_counter(filename):
+    with open(filename, "r") as f:
+        text = f.read().lower()
+    return Counter(text.split())
+
+
+def print_words(filename):
+    print(word_counter(filename))
+
+
+def print_top(filename):
+    print(word_counter(filename).most_common()[:20])
+
 
 ###
 
