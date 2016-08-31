@@ -7,7 +7,7 @@
 # http://code.google.com/edu/languages/google-python-class/
 
 # Additional basic list exercises
-import itertools
+import heapq
 
 
 # D. Given a list of numbers, return a list where
@@ -25,7 +25,7 @@ def remove_adjacent(nums):
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
 def linear_merge(list1, list2):
-    return sorted(itertools.chain(list1, list2))
+    return list(heapq.merge(list1, list2))
 
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)

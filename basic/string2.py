@@ -21,10 +21,12 @@ import math
 
 
 def verbing(s):
-    if len(s) >= 3:
-        return s + "ly" if s[-3:] == "ing" else s + "ing"
-    else:
+    if len(s) < 3:
         return s
+
+    sufix = 'ly' if s.endswith('ing') else s + 'ing'
+
+    return sufix
 
 
 # E. not_bad
@@ -36,7 +38,7 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-    return re.sub(r"not(.*)bad", "good", s)
+    return re.sub(r"not\b(.(?!not))*?bad", "good", s)
 
 
 # F. front_back
@@ -47,9 +49,11 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-    a_front, b_front = len(a) - math.floor((len(a)) / 2), len(b) - math.floor((len(b)) / 2)
-    return a[:a_front] + b[:b_front] + a[a_front:] + b[b_front:]
+    mid = lambda s: (len(s) + 1) // 2
+    front = lambda s: s[:mid(s)]
+    back = lambda s: s[mid(s):]
 
+    return ''.join([front(a), front(b), back(a), back(b)])
 
 
 # Simple provided test() function used in main() to print
